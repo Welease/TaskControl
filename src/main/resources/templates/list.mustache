@@ -1,0 +1,49 @@
+<html>
+<head>
+    <meta charset="UTF-8">
+    <title>List</title>
+    <link rel='stylesheet' href='https://fonts.googleapis.com/css?family=Rubik:400,700'><link rel="stylesheet" href="/style.css">
+
+</head>
+
+<body>
+<table align="center" class="table table-striped">
+    <thead>
+    <tr>
+        <th>Name</th>
+        <th>Role</th>
+        <th>Login</th>
+    </tr>
+    </thead>
+    <tbody>
+    {{#users}}
+        <tr>
+            <td>{{name}}</td>
+            <td>{{role}}</td>
+            <td>{{login}}</td>
+        </tr>
+    {{/users}}
+    </tbody>
+</table>
+<table style="center" class="table table-striped">
+    <thead>
+    <tr>
+        <th>Id</th>
+        <th>Description</th>
+        <th>Priority</th>
+        <th>Date</th>
+    </tr>
+    </thead>
+    <tbody>
+    {{#tasks}}
+        <tr>
+            <td>{{id}}</td>
+            <td>{{description}}</td>
+            <td>{{priority}}</td>
+            <td>{{endDate}}</td>
+        </tr>
+    {{/tasks}}
+    </tbody>
+</table>
+</body>
+</html>

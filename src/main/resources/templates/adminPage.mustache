@@ -1,0 +1,49 @@
+<html>
+<head>
+    <meta charset="UTF-8">
+    <title>Login Page</title>
+    <link rel='stylesheet' href='https://fonts.googleapis.com/css?family=Rubik:400,700'><link rel="stylesheet" href="/style.css">
+
+</head>
+<body>
+    <div>Сотрудники</div>
+    <form method="post" action="addEmployee">
+        <div class="input-field">
+            <input type="text" name="name" placeholder="Name" autocomplete="nope">
+        </div>
+        <div class="input-field">
+            <input type="text" name="login" placeholder="Login" autocomplete="nope">
+        </div>
+        <div class="input-field">
+            <input type="text" name="password" placeholder="Password" autocomplete="nope">
+        </div>
+        <div class="input-field">
+            <input type="text" name="role" placeholder="Role" autocomplete="nope">
+        </div>
+        <div class="action">
+            <button type="submit">Add employee</button>
+        </div>
+    </form>
+
+    <form method="post" action="addTask">
+        <div class="input-field">
+            <input type="text" name="description" placeholder="Description" autocomplete="nope">
+        </div>
+        <div class="input-field">
+            <input type="date" name="endDate" placeholder="To complete before" autocomplete="nope">
+        </div>
+        <div class="input-field">
+            <input type="text" name="priority" placeholder="Priority" autocomplete="nope">
+        </div>
+        <select class="form-control" id="userId" name="userId">
+            <option value="">Select executor</option>
+            {{#users}}
+                <option>{{name}} {{role}}</option>
+            {{/users}}
+        </select>
+        <div class="action">
+            <button type="submit">Add task</button>
+        </div>
+    </form>
+</body>
+</html>
