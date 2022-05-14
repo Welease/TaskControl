@@ -1,0 +1,52 @@
+<html>
+<head>
+    <meta charset="UTF-8">
+    <title>Login Page</title>
+    <link rel='stylesheet' href='https://fonts.googleapis.com/css?family=Rubik:400,700'><link rel="stylesheet" href="/style.css">
+
+</head>
+<body>
+<form method="get" action="/">
+    <div class="action">
+        <button type="submit">Выйти</button>
+    </div>
+</form>
+
+<div class="main-form">
+    {{#currentUser}}
+    <table class="table mt-4 col-md-11 m-auto">
+        <thead>
+        <tr>
+            <th>Id</th>
+            <th>Description</th>
+            <th>Priority</th>
+            <th>Begin Date</th>
+            <th>End Date</th>
+            <th>Status</th>
+            <th>    </th>
+        </tr>
+        </thead>
+        <tbody>
+        {{#tasks}}
+            <tr>
+                <td>{{id}}</td>
+                <td>{{description}}</td>
+                <td>{{priority}}</td>
+                <td>{{beginDate}}</td>
+                <td>{{endDate}}</td>
+                <td>{{status}}</td>
+                <td>
+                    <form method="get" action="updateTaskByUser/{{id}}">
+                        <div class="action">
+                            <button type="submit">Изменить статус</button>
+                        </div>
+                    </form>
+                </td>
+            </tr>
+        {{/tasks}}
+        </tbody>
+    </table>
+    {{/currentUser}}
+</div>
+</body>
+</html>

@@ -1,0 +1,66 @@
+<html>
+<head>
+    <meta charset="UTF-8">
+    <title>Login Page</title>
+    <link rel='stylesheet' href='https://fonts.googleapis.com/css?family=Rubik:400,700'><link rel="stylesheet" href="/style.css">
+
+</head>
+<body>
+<form method="get" action="/">
+    <div class="action">
+        <button type="submit">Выйти</button>
+    </div>
+</form>
+
+<div class="main-form">
+    <table class="table mt-4 col-md-11 m-auto">
+        <thead>
+        <tr>
+            <th>Id</th>
+            <th>Description</th>
+            <th>Priority</th>
+            <th>Begin Date</th>
+            <th>End Date</th>
+            <th>Executor</th>
+            <th>Status</th>
+            <th>    </th>
+            <th>    </th>
+        </tr>
+        </thead>
+        <tbody>
+        {{#tasks}}
+            <tr>
+                <td>{{id}}</td>
+                <td>{{description}}</td>
+                <td>{{priority}}</td>
+                <td>{{beginDate}}</td>
+                <td>{{endDate}}</td>
+                <td>{{#executor}}{{name}}{{/executor}}</td>
+                <td>{{status}}</td>
+                <td>
+                    <form method="get" action="updateTask/{{id}}">
+                        <div class="action">
+                            <button type="submit">Изменить</button>
+                        </div>
+                    </form>
+                </td>
+
+                <td>
+                    <form method="post" action="deleteTask/{{id}}">
+                        <div class="action">
+                            <button type="submit">Удалить</button>
+                        </div>
+                    </form>
+                </td>
+            </tr>
+        {{/tasks}}
+        </tbody>
+    </table>
+    <form method="get" action="newTask">
+        <div class="action">
+            <button type="submit">Добавить новую задачу</button>
+        </div>
+    </form>
+</div>
+</body>
+</html>

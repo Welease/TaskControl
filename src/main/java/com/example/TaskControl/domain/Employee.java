@@ -18,18 +18,10 @@ public class Employee {
     @Getter
     private Long id;
 
-    public Employee(String name, String login, String password, String role) {
-        this.name = name;
-        this.login = login;
-        this.password = password;
-        this.role = role;
-    }
-
-    public Employee (String name, String surName, String middleName, Long tabNumber, String phone, String login, String password, String role) {
+    public Employee (String name, String surName, String middleName, String phone, String login, String password, String role) {
         this.name = name;
         this.surName = surName;
         this.middleName = middleName;
-        this.tabNumber = tabNumber;
         this.phone = phone;
         this.login = login;
         this.password = password;
@@ -55,10 +47,6 @@ public class Employee {
     @Getter
     @Setter
     private String middleName;
-
-    @Getter
-    @Setter
-    private Long tabNumber;
 
     @Getter
     @Setter

@@ -45,6 +45,7 @@
                             <th>Begin Date</th>
                             <th>End Date</th>
                             <th>Executor</th>
+                            <th>Status</th>
                             <th>    </th>
                             <th>    </th>
                         </tr>
@@ -58,8 +59,9 @@
                                 <td>{{beginDate}}</td>
                                 <td>{{endDate}}</td>
                                 <td>{{#executor}}{{name}}{{/executor}}</td>
+                                <td>{{status}}</td>
                                 <td>
-                                    <form method="get" action="updateTask">
+                                    <form method="get" action="updateTask/{{id}}">
                                         <div class="action">
                                             <button type="submit">Изменить</button>
                                         </div>

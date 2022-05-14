@@ -11,9 +11,13 @@
 <table align="center" class="table table-striped">
     <thead>
     <tr>
-         <th>Name</th>
+        <th>SurName</th>
+        <th>Name</th>
+        <th>MiddleName</th>
+        <th>Phone</th>
         <th>Role</th>
         <th>Login</th>
+        <th>Tasks</th>
         <th>     </th>
         <th>     </th>
     </tr>
@@ -21,12 +25,16 @@
     <tbody>
     {{#users}}
         <tr>
+            <td>{{surName}}</td>
             <td>{{name}}</td>
+            <td>{{middleName}}</td>
+            <td>{{phone}}</td>
             <td>{{role}}</td>
             <td>{{login}}</td>
+            <td>{{#tasks}}{{id}} {{status}} {{/tasks}}</td>
             <td>
             <td>
-                <form method="get" action="employees/changeOrNew/{{id}}">
+                <form method="get" action="{{id}}">
                     <div class="action">
                         <button type="submit">Изменить</button>
                     </div>

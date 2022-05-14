@@ -15,6 +15,7 @@ import java.sql.Date;
 public class Task {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
+    @Getter
     private Integer id;
 
     public Task(String description, Date beginDate, Date endDate, String priority, String status, Employee executor) {

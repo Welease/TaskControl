@@ -1,0 +1,42 @@
+<html>
+<head>
+    <meta charset="UTF-8">
+    <title>New employee</title>
+    <link rel='stylesheet' href='https://fonts.googleapis.com/css?family=Rubik:400,700'><link rel="stylesheet" href="/style.css">
+
+</head>
+<body>
+<div class="login-form">
+    <form method="post" action="addEmployee">
+        <h1>Информация о сотруднике</h1>
+        {{#toEditUser}}
+            <input type="hidden" name="empId" value={{id}}>
+        <div class="input-field">
+            <input type="text" value={{surName}} name="surName" placeholder="SurName" autocomplete="nope">
+        </div>
+        <div class="input-field">
+            <input type="text" value={{name}} name="name" placeholder="Name" autocomplete="nope">
+        </div>
+        <div class="input-field">
+            <input type="text" value={{middleName}} name="middleName" placeholder="MiddleName" autocomplete="nope">
+        </div>
+        <div class="input-field">
+            <input type="text" value={{phone}} name="phone" placeholder="Phone" autocomplete="nope">
+        </div>
+        <div class="input-field">
+            <input type="text" value={{login}} name="login" placeholder="Login" autocomplete="nope">
+        </div>
+        <div class="input-field">
+            <input type="text" value={{password}} name="password" placeholder="Password" autocomplete="nope">
+        </div>
+        <div class="input-field">
+            <input type="text" value={{role}} name="role" placeholder="Role" autocomplete="nope">
+        </div>
+        <div class="action">
+            <button type="submit">Изменить данные</button>
+        </div>
+        {{/toEditUser}}
+    </form>
+</div>
+</body>
+</html>

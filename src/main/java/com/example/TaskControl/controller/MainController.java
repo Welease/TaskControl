@@ -54,12 +54,47 @@ public class MainController {
     }
 
     @PostMapping("addEmployee")
-    public String addEmployee(@RequestParam String role,@RequestParam String name, @RequestParam String login, @RequestParam String password,  Map<String, Object> model) {
-        Employee employee = new Employee(name, login, password, role);
+    public String addEmployee(@RequestParam String role,
+                              @RequestParam String name,
+                              @RequestParam String login,
+                              @RequestParam String password,
+                              @RequestParam String surName,
+                              @RequestParam String middleName,
+                              @RequestParam String phone,
+                              Map<String, Object> model) {
+        Employee employee = new Employee(name, surName, middleName, phone, login, password, role);
         employeeService.saveOrUpdateEmployee(employee);
         reloadUsers(model);
         reloadTasks(model);
         return getMainPage(model);
+    }
+
+    @PostMapping("employees/addEmployee")
+    public String addEmployee(@RequestParam Long empId,
+                              @RequestParam String role,
+                              @RequestParam String name,
+                              @RequestParam String login,
+                              @RequestParam String password,
+                              @RequestParam String surName,
+                              @RequestParam String middleName,
+                              @RequestParam String phone,
+                              Map<String, Object> model) {
+        try {
+            Employee employee = employeeService.getEmployeeById(empId);
+            employee.setLogin(login);
+            employee.setPassword(password);
+            employee.setMiddleName(middleName);
+            employee.setPhone(phone);
+            employee.setSurName(surName);
+            employee.setRole(role);
+            employee.setName(name);
+            employeeService.saveOrUpdateEmployee(employee);
+        } catch (Exception ex) {
+            return "errorPage";
+        }
+        reloadUsers(model);
+        reloadTasks(model);
+        return "redirect:/" + getMainPage(model);
     }
 
     @PostMapping("addTask")
@@ -77,23 +112,81 @@ public class MainController {
         return getMainPage(model);
     }
 
+    @GetMapping("updateTaskByUser/{id}")
+    public String updateTaskByUser(@PathVariable int id, Map<String, Object> model) {
+        model.put("toEditTask", taskService.getTaskById(id));
+        reloadUsers(model);
+        reloadTasks(model);
+        return "editTaskByUser";
+    }
+
+    @PostMapping("updateTaskByUser/addTask")
+    public String addTask(@RequestParam Integer taskId,
+                          @RequestParam String description,
+                          @RequestParam String status,
+                          Map<String, Object> model) {
+        try {
+            Task task = taskService.getTaskById(taskId);
+            task.setDescription(description);
+            task.setStatus(status);
+            taskService.saveOrUpdateTask(task);
+        } catch (Exception ex) {
+            ex.printStackTrace();
+        }
+        return "redirect:/" + getMainPage(model);
+    }
+
+    @PostMapping("updateTask/addTask")
+    public String addTask(@RequestParam Integer taskId,
+                          @RequestParam String userId,
+                          @RequestParam String description,
+                          @RequestParam Date endDate,
+                          @RequestParam Date beginDate,
+                          @RequestParam String priority,
+                          @RequestParam String status,
+                          Map<String, Object> model) {
+        String id = userId.substring(0, userId.indexOf(' '));
+        Employee employee = employeeService.getEmployeeById(Long.parseLong(id));
+        Task task;
+        try {
+            task = taskService.getTaskById(taskId);
+            task.setDescription(description);
+            task.setEndDate(endDate);
+            task.setBeginDate(beginDate);
+            task.setPriority(priority);
+            task.setStatus(status);
+            task.setExecutor(employee);
+        } catch (Exception ex) {
+            task = new Task(description, beginDate, endDate, priority, status, employee);
+        }
+        taskService.saveOrUpdateTask(task);
+        return "redirect:/" + getMainPage(model);
+    }
+
     //showing
 
     @GetMapping("employees")
     public String listOfEmployees(Map<String, Object> model) {
         reloadUsers(model);
+        reloadTasks(model);
         return "listOfEmployees";
     }
 
     //updating
+    @GetMapping("updateTask/{id}")
+    public String updateTask(@PathVariable int id, Map<String, Object> model) {
+        model.put("toEditTask", taskService.getTaskById(id));
+        reloadUsers(model);
+        reloadTasks(model);
+        return "editTask";
+    }
 
-    @GetMapping("tasks/new/{id}")
-    public String updateTask(@PathVariable String id, Map<String, Object> model) {
-        System.out.println("id is: " + id);
-        if (id == null)
-            return "task";
-        else
-            return login(model);
+    @GetMapping("employees/{id}")
+    public String updateEmployee(@PathVariable long id, Map<String, Object> model) {
+        model.put("toEditUser", employeeService.getEmployeeById(id));
+        reloadUsers(model);
+        reloadTasks(model);
+        return "editEmployee";
     }
 
     //deleting
@@ -135,18 +228,25 @@ public class MainController {
         return "adminPage";
     }
 
-    @GetMapping("hr")
+    @GetMapping("hrPage")
     public String hrPage(Map<String, Object> model){
         reloadUsers(model);
         reloadTasks(model);
         return "hrPage";
     }
 
-    @GetMapping("user")
+    @GetMapping("userPage")
     public String userPage(Map<String, Object> model){
         reloadUsers(model);
         reloadTasks(model);
-        return "userPage";
+        Employee employee = employeeService.getEmployeeById(id);
+
+        if (employee != null) {
+            model.put("currentUser", employee);
+            return "userPage";
+        }
+        model.put("errorMessage", "can't login by user");
+        return "errorPage";
     }
 
     private String getMainPage(Map<String, Object> model) {

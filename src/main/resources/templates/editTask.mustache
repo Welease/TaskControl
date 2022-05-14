@@ -1,0 +1,41 @@
+<html>
+<head>
+    <meta charset="UTF-8">
+    <title>Task</title>
+    <link rel='stylesheet' href='https://fonts.googleapis.com/css?family=Rubik:400,700'><link rel="stylesheet" href="/style.css">
+
+</head>
+<body>
+<div class="login-form">
+    <form method="post" action="addTask">
+        {{#toEditTask}}
+            <input type="hidden" name="taskId" value={{id}}>
+        <div class="input-field">
+            <input type="text" name="description" value={{description}} placeholder="Description" autocomplete="nope">
+        </div>
+        <div class="input-field">
+            <input type="date" name="beginDate" value={{beginDate}} placeholder="ToStartAfter" autocomplete="nope">
+        </div>
+        <div class="input-field">
+            <input type="date" name="endDate" value={{endDate}} placeholder="ToCompleteBefore" autocomplete="nope">
+        </div>
+        <div class="input-field">
+            <input type="text" name="priority" value={{priority}} placeholder="Priority" autocomplete="nope">
+        </div>
+        <div class="input-field">
+            <input type="text" name="status" value={{status}} placeholder="Status" autocomplete="nope" readonly="true">
+        </div>
+        <select class="form-control" id="userId" name="userId">
+            <option value="">Select executor</option>
+            {{#users}}
+                <option>{{id}} {{name}} {{role}}</option>
+            {{/users}}
+        </select>
+        <div class="action">
+            <button type="submit">Add task</button>
+        </div>
+        {{/toEditTask}}
+    </form>
+</div>
+</body>
+</html>
