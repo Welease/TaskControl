@@ -1,0 +1,48 @@
+<html>
+<head>
+    <meta charset="UTF-8">
+    <title>List</title>
+    <link rel='stylesheet' href='https://fonts.googleapis.com/css?family=Rubik:400,700'><link rel="stylesheet" href="/style.css">
+
+</head>
+
+<body>
+<div class="main-form">
+<table align="center" class="table table-striped">
+    <thead>
+    <tr>
+         <th>Name</th>
+        <th>Role</th>
+        <th>Login</th>
+        <th>     </th>
+        <th>     </th>
+    </tr>
+    </thead>
+    <tbody>
+    {{#users}}
+        <tr>
+            <td>{{name}}</td>
+            <td>{{role}}</td>
+            <td>{{login}}</td>
+            <td>
+            <td>
+                <form method="get" action="employees/changeOrNew/{{id}}">
+                    <div class="action">
+                        <button type="submit">Изменить</button>
+                    </div>
+                </form>
+            </td>
+            <td>
+                <form method="post" action="deleteEmployee/{{id}}">
+                    <div class="action">
+                        <button type="submit">Удалить</button>
+                    </div>
+                </form>
+            </td>
+        </tr>
+    {{/users}}
+    </tbody>
+</table>
+</div>
+</body>
+</html>

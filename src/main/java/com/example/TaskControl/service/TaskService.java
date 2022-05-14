@@ -12,9 +12,13 @@ public class TaskService {
     @Autowired
     private TaskRepository taskRepository;
 
-    public void saveTask(Task task) {
+    public void saveOrUpdateTask(Task task) {
         taskRepository.save(task);
     }
 
     public List<Task> getTasks() { return taskRepository.findAll(); }
+
+    public Task getTaskById(Integer id) { return taskRepository.getById(id); }
+
+    public void deleteTask(Integer id) { taskRepository.deleteById(id); }
 }

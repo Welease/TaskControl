@@ -9,6 +9,6 @@ import org.springframework.stereotype.Repository;
 import java.util.List;
 
 @Repository
-public interface TaskRepository extends JpaRepository<Task, Long>, JpaSpecificationExecutor<Task> {
+public interface TaskRepository extends JpaRepository<Task, Integer>, JpaSpecificationExecutor<Task> {
     List<Task> findAll();
 }

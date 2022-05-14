@@ -26,14 +26,6 @@ public class Task {
         this.executor = executor;
     }
 
-    public Task(String description, Date beginDate, Date endDate, String priority, String status) {
-        this.description = description;
-        this.beginDate = beginDate;
-        this.endDate= endDate;
-        this.priority = priority;
-        this.status = status;
-    }
-
     @Setter
     @Getter
     private String description;

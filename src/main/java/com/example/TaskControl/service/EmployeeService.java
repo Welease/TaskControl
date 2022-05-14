@@ -16,11 +16,17 @@ public class EmployeeService {
         return employeeRepository.findAll();
     }
 
-    public void saveEmployee(Employee employee) {
+    public void saveOrUpdateEmployee(Employee employee) {
         employeeRepository.save(employee);
     }
 
     public Employee getEmployeeByLogPass(String login, String password) {
         return employeeRepository.getEmployeeByLoginAndPassword(login, password);
+    }
+
+    public Employee getEmployeeById(Long id) { return employeeRepository.getById(id); }
+
+    public void deleteEmployee(Long id) {
+        employeeRepository.deleteById(id);
     }
 }

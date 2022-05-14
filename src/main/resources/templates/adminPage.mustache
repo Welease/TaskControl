@@ -6,44 +6,82 @@
 
 </head>
 <body>
-    <div>Сотрудники</div>
-    <form method="post" action="addEmployee">
-        <div class="input-field">
-            <input type="text" name="name" placeholder="Name" autocomplete="nope">
-        </div>
-        <div class="input-field">
-            <input type="text" name="login" placeholder="Login" autocomplete="nope">
-        </div>
-        <div class="input-field">
-            <input type="text" name="password" placeholder="Password" autocomplete="nope">
-        </div>
-        <div class="input-field">
-            <input type="text" name="role" placeholder="Role" autocomplete="nope">
-        </div>
+    <form method="get" action="/">
         <div class="action">
-            <button type="submit">Add employee</button>
+            <button type="submit">Выйти</button>
         </div>
     </form>
 
-    <form method="post" action="addTask">
-        <div class="input-field">
-            <input type="text" name="description" placeholder="Description" autocomplete="nope">
-        </div>
-        <div class="input-field">
-            <input type="date" name="endDate" placeholder="To complete before" autocomplete="nope">
-        </div>
-        <div class="input-field">
-            <input type="text" name="priority" placeholder="Priority" autocomplete="nope">
-        </div>
-        <select class="form-control" id="userId" name="userId">
-            <option value="">Select executor</option>
-            {{#users}}
-                <option>{{name}} {{role}}</option>
-            {{/users}}
-        </select>
-        <div class="action">
-            <button type="submit">Add task</button>
-        </div>
-    </form>
+    <div class="main-form">
+        <table>
+            <tbody>
+            <tr>
+                <td>
+                    <form method="get" action="employees/">
+                        <div class="action">
+                            <button type="submit">Наши сотрудники</button>
+                        </div>
+                    </form>
+                </td>
+
+                <td>
+                    <form method="get" action="newEmployee">
+                        <div class="action">
+                            <button type="submit">Добавить сотрудника</button>
+                        </div>
+                    </form>
+                </td>
+            </tr>
+            </tbody>
+        </table>
+        <br><br>
+
+        <table class="table mt-4 col-md-11 m-auto">
+                        <thead>
+                        <tr>
+                            <th>Id</th>
+                            <th>Description</th>
+                            <th>Priority</th>
+                            <th>Begin Date</th>
+                            <th>End Date</th>
+                            <th>Executor</th>
+                            <th>    </th>
+                            <th>    </th>
+                        </tr>
+                        </thead>
+                        <tbody>
+                        {{#tasks}}
+                            <tr>
+                                <td>{{id}}</td>
+                                <td>{{description}}</td>
+                                <td>{{priority}}</td>
+                                <td>{{beginDate}}</td>
+                                <td>{{endDate}}</td>
+                                <td>{{#executor}}{{name}}{{/executor}}</td>
+                                <td>
+                                    <form method="get" action="updateTask">
+                                        <div class="action">
+                                            <button type="submit">Изменить</button>
+                                        </div>
+                                    </form>
+                                </td>
+
+                                <td>
+                                    <form method="post" action="deleteTask/{{id}}">
+                                        <div class="action">
+                                            <button type="submit">Удалить</button>
+                                        </div>
+                                    </form>
+                                </td>
+                            </tr>
+                        {{/tasks}}
+                        </tbody>
+                    </table>
+        <form method="get" action="newTask">
+            <div class="action">
+                <button type="submit">Добавить новую задачу</button>
+            </div>
+        </form>
+    </div>
 </body>
 </html>

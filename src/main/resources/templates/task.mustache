@@ -1,0 +1,38 @@
+<html>
+<head>
+    <meta charset="UTF-8">
+    <title>Task</title>
+    <link rel='stylesheet' href='https://fonts.googleapis.com/css?family=Rubik:400,700'><link rel="stylesheet" href="/style.css">
+
+</head>
+<body>
+<div class="login-form">
+    <form method="post" action="addTask">
+        <div class="input-field">
+            <input type="text" name="description" placeholder="Description" autocomplete="nope">
+        </div>
+        <div class="input-field">
+            <input type="date" name="beginDate" placeholder="To start after" autocomplete="nope">
+        </div>
+        <div class="input-field">
+            <input type="date" name="endDate" placeholder="To complete before" autocomplete="nope">
+        </div>
+        <div class="input-field">
+            <input type="text" name="priority" placeholder="Priority" autocomplete="nope">
+        </div>
+        <div class="input-field">
+            <input type="text" name="status" value="toDo" placeholder="Status" autocomplete="nope" readonly="true">
+        </div>
+        <select class="form-control" id="userId" name="userId">
+            <option value="">Select executor</option>
+            {{#users}}
+                <option>{{id}} {{name}} {{role}}</option>
+            {{/users}}
+        </select>
+        <div class="action">
+            <button type="submit">Add task</button>
+        </div>
+    </form>
+</div>
+</body>
+</html>
