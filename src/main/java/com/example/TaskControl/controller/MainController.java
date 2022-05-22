@@ -4,10 +4,14 @@ import com.example.TaskControl.domain.Employee;
 import com.example.TaskControl.domain.Task;
 import com.example.TaskControl.service.EmployeeService;
 import com.example.TaskControl.service.TaskService;
+import net.bytebuddy.utility.RandomString;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.multipart.MultipartFile;
 
+import java.io.File;
 import java.sql.Date;
 import java.util.List;
 import java.util.Map;
@@ -15,6 +19,8 @@ import java.util.Map;
 
 @Controller
 public class MainController {
+    @Value("${upload.path}")
+    private String upPath;
     @Autowired
     EmployeeService employeeService;
 
@@ -39,6 +45,7 @@ public class MainController {
     }
 
     //creating
+
 
     @GetMapping("newEmployee")
     public String newEmployee(Map<String, Object> model) {
@@ -104,6 +111,7 @@ public class MainController {
                           @RequestParam Date beginDate,
                           @RequestParam String priority,
                           @RequestParam String status,
+                          @RequestParam String report,
                           Map<String, Object> model) {
         String id = userId.substring(0, userId.indexOf(' '));
         Employee employee = employeeService.getEmployeeById(Long.parseLong(id));
@@ -124,12 +132,16 @@ public class MainController {
     public String addTask(@RequestParam Integer taskId,
                           @RequestParam String description,
                           @RequestParam String status,
+                          @RequestParam MultipartFile report,
                           Map<String, Object> model) {
         try {
             Task task = taskService.getTaskById(taskId);
             task.setDescription(description);
             task.setStatus(status);
+            task.setReport(report.getOriginalFilename());
             taskService.saveOrUpdateTask(task);
+
+            report.transferTo(new File(upPath + "/" + report.getOriginalFilename()));
         } catch (Exception ex) {
             ex.printStackTrace();
         }

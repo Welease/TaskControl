@@ -7,7 +7,7 @@
 </head>
 <body>
 <div class="login-form">
-    <form method="post" action="addTask">
+    <form method="post" action="addTask" enctype="multipart/form-data">
         {{#toEditTask}}
             <input type="hidden" name="taskId" value={{id}}>
         <div class="input-field">
@@ -28,6 +28,9 @@
                 <option>inProgress</option>
                 <option>Finished</option>
             </select>
+            <div class="input-field">
+                <input type="file" name="report" value="" placeholder="Report" autocomplete="nope">
+            </div>
         <div class="action">
             <button type="submit">Add task</button>
         </div>

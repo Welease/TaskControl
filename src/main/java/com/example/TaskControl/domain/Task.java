@@ -25,6 +25,7 @@ public class Task {
         this.priority = priority;
         this.status = status;
         this.executor = executor;
+        this.report = "";
     }
 
     @Setter
@@ -46,6 +47,10 @@ public class Task {
     @Setter
     @Getter
     private String status;
+
+    @Getter
+    @Setter
+    private String report;
 
     @Getter
     @Setter
