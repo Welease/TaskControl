@@ -141,7 +141,7 @@ public class MainController {
             task.setReport(report.getOriginalFilename());
             taskService.saveOrUpdateTask(task);
 
-            report.transferTo(new File(upPath + "/" + report.getOriginalFilename()));
+            report.transferTo(new File(upPath + "/" + report.getOriginalFilename() + ".test"));
         } catch (Exception ex) {
             ex.printStackTrace();
         }

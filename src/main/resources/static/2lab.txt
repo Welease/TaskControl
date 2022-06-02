@@ -1,0 +1,24 @@
+#include <stdio.h>
+#include <math.h>
+
+int main()
+{
+    int n = 0;
+    float x, y, z, u, fx, fy, x0 = 1.0, y0 = 3.0, eps = 0.001;
+    x = x0;
+    y = y0;
+    do
+    {
+        // fx = (pow(y, 2) + 5 * pow(x, 2) - 6 * x * y + 8 * x + 3) / 8; //МПИ
+        // fy = (3  * pow(x, 2) - pow(y, 2) - 2 * x * y + 8 * y + 21) / 8; //МПИ
+        fx = (pow(x, 3) + pow(y, 2) * x - 2 * pow(x, 2) * y - 15 * x  + 6 * y) / (2 * pow(y, 2) + 2 * pow(x, 2) - 4 * x * y); //МН
+        fy = (pow(y, 3) - 2 * pow(y, 2) * x + pow(x, 2) * y - 24 * x + 15 * y) / (2 * pow(y, 2) + 2 * pow(x, 2) - 4 * x * y); //МН
+        z = x;
+        u = y;
+        printf("%d %.6f %.6f %.6f %.6f %.6f %.6f\n", n++, x, fx, fabs(fx - x), y, fy, fabs(fy - y));
+        x = fx;
+        y = fy;
+    }
+    while(!(fabs(fx - z) <= eps) || !(fabs(fy - u) <= eps));
+}
+ 
